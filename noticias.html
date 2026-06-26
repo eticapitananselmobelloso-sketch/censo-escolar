@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E.T.I. Capítan Anselmo Belloso - Noticias</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f7f9fa; 
+            color: #333; 
+            line-height: 1.6; 
+        }
+        header { 
+            background-color: #1e3a8a; 
+            color: white; 
+            padding: 25px; 
+            text-align: center; 
+        }
+        h1 { margin: 0; font-size: 26px; }
+        p.subtitulo { margin: 5px 0 0 0; color: #bfdbfe; font-size: 14px; }
+        
+        nav { 
+            background-color: #0f172a; 
+            text-align: center; 
+            position: sticky;
+            top: 0;
+        }
+        nav a { 
+            display: inline-block; 
+            color: #cbd5e1; 
+            padding: 14px 20px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 15px; 
+        }
+        nav a:hover { 
+            background-color: #1e293b; 
+            color: white; 
+        }
+        nav a.active { 
+            background-color: #2563eb; 
+            color: white; 
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 30px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 6px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            color: #1e3a8a; 
+            border-bottom: 2px solid #e2e8f0; 
+            padding-bottom: 8px; 
+            margin-top: 0; 
+        }
+        .noticia-card {
+            background-color: #fff;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+        .noticia-fecha {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .noticia-card h3 {
+            margin: 5px 0 10px 0;
+            color: #1e3a8a;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #666;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>E.T.I. Capitán Anselmo Belloso</h1>
+    <p class="subtitulo">Centro de Control de Estudio e Información</p>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="censo.html">Censo</a>
+    <a href="noticias.html" class="active">Noticias</a>
+    <a href="direccion.html">Dirección</a>
+    <a href="contacto.html">Contacto</a>
+</nav>
+
+<div class="container">
+    <h2>Cartelera Informativa Virtual</h2>
+    <p>Mantente al día con los eventos, comunicados y logros más recientes de nuestra comunidad estudiantil.</p>
+    
+    <div class="noticia-card">
+        <span class="noticia-fecha">26 de Junio de 2026</span>
+        <h3>Inicio del Proceso de Registro para el Censo Escolar</h3>
+        <p>Se informa a toda la comunidad de la E.T.I. Capitán Anselmo Belloso que ya se encuentra disponible en este portal el módulo de censo estudiantil. Invitamos a los representantes a registrar los datos de los alumnos para optimizar los procesos de Control de Estudio.</p>
+    </div>
+
+    <div class="noticia-card">
+        <span class="noticia-fecha">15 de Junio de 2026</span>
+        <h3>Mantenimiento Técnico y Recuperación de Talleres</h3>
+        <p>Gracias al esfuerzo conjunto del personal administrativo, obrero y estudiantes de las menciones técnicas, se llevó a cabo una jornada exitosa de mantenimiento preventivo en las maquinarias y herramientas de los talleres mecánicos y eléctricos.</p>
+    </div>
+
+    <div class="noticia-card">
+        <span class="noticia-fecha">05 de Junio de 2026</span>
+        <h3>Entrega de Proyectos Socio-Tecnológicos</h3>
+        <p>Felicitamos a los estudiantes de último año por la excelente defensa de sus proyectos industriales de fin de curso. Una vez más demostraron el alto nivel académico y el compromiso social que caracteriza a los egresados de nuestra institución.</p>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
