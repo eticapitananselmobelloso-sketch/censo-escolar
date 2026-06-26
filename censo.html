@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E.T.I. Capítan Anselmo Belloso - Censo Completo</title>
+    <title>E.T.I. Capitán Anselmo Belloso - Censo Completo</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         emailjs.init("c7LgpYNxzNZruqQpF");
     </script>
     <style>
-        /* ... (tus estilos permanecen iguales) ... */
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f9fa; color: #333; line-height: 1.6; }
         header { background-color: #1e3a8a; color: white; padding: 25px; text-align: center; }
         h1 { margin: 0; font-size: 26px; }
@@ -27,6 +26,7 @@
         label { margin-bottom: 5px; font-size: 14px; font-weight: 500; }
         input, select, textarea { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; background-color: #fff; font-size: 14px; font-family: inherit; }
         input[type="file"] { padding: 5px; background: #f1f5f9; border: 1px dashed #cbd5e1; }
+        .aviso-peso { font-size: 11px; color: #666; margin-top: 4px; }
         .btn-bloque { display: block; width: 100%; background-color: #16a34a; color: white; padding: 14px; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; margin-top: 10px; }
         .btn-bloque:hover { background-color: #15803d; }
         footer { text-align: center; padding: 20px; font-size: 13px; color: #666; margin-top: 40px; }
@@ -49,7 +49,7 @@
 </nav>
 
 <div class="container">
-    <h2>Formulario Oficial de Censo Escolar Avanzado</h2>
+    <h2>Formulario Oficial de Censo Escolar</h2>
     <form id="formularioCenso">
         <input type="hidden" name="to_email" value="e.t.icapitananselmobelloso@gmail.com">
         
@@ -74,7 +74,11 @@
                     <option value="Yaracuy">Yaracuy</option>
                 </select></div>
                 <div class="form-campo"><label for="parroquia_rep">Parroquia de Habitación:</label><input type="text" id="parroquia_rep" name="parroquia_rep" required></div>
-                <div class="form-campo"><label for="foto_rep">Foto del Representante:</label><input type="file" id="foto_rep" name="foto_rep" accept="image/*" required></div>
+                <div class="form-campo">
+                    <label for="foto_rep">Foto del Representante:</label>
+                    <input type="file" id="foto_rep" name="foto_rep" accept="image/*" required>
+                    <p class="aviso-peso">* Recomendado: < 2MB</p>
+                </div>
                 <div class="form-campo completo"><label for="direccion_rep">Dirección Completa:</label><textarea id="direccion_rep" name="direccion_rep" rows="2" required></textarea></div>
             </div>
         </fieldset>
@@ -98,7 +102,11 @@
                     <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
                     <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
                 </select></div>
-                <div class="form-campo"><label for="foto_alumno">Foto del Aspirante:</label><input type="file" id="foto_alumno" name="foto_alumno" accept="image/*" required></div>
+                <div class="form-campo">
+                    <label for="foto_alumno">Foto del Aspirante:</label>
+                    <input type="file" id="foto_alumno" name="foto_alumno" accept="image/*" required>
+                    <p class="aviso-peso">* Recomendado: < 2MB</p>
+                </div>
             </div>
         </fieldset>
 
@@ -113,16 +121,16 @@ document.getElementById('formularioCenso').addEventListener('submit', function(e
     e.preventDefault();
     const btn = this.querySelector('.btn-bloque');
     btn.disabled = true; 
-    btn.innerText = "Enviando, espere...";
+    btn.innerText = "Enviando archivos, espere...";
 
-    // Enviamos el formulario directamente. 
-    // EmailJS gestionará las fotos como adjuntos nativos.
+    // Envío nativo de EmailJS sin compresión Base64
     emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', this)
         .then(() => { 
             alert("¡Censo enviado con éxito!"); 
             this.reset(); 
         }, (err) => { 
-            alert("Error en el envío: " + JSON.stringify(err)); 
+            console.error("Error detallado:", err);
+            alert("Error en el envío. Asegúrese de que las fotos no sean demasiado pesadas."); 
         })
         .finally(() => { 
             btn.disabled = false; 
