@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E.T.I. Capítan Anselmo Belloso - Censo Completo</title>
-    <!-- Conector de EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        // COLOCA AQUÍ TU CLAVE PÚBLICA DE EMAILJS
-        emailjs.init("TU_PUBLIC_KEY");
+        // Inicialización oficial con tu clave pública
+        emailjs.init("c7LgpYNxzNZruqQpF");
     </script>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f9fa; color: #333; line-height: 1.6; }
@@ -24,7 +23,7 @@
         legend { font-weight: bold; color: #1e3a8a; padding: 0 10px; font-size: 16px; }
         .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .form-campo { display: flex; flex-direction: column; }
-        .form-campo.completo { grid-column:  1 / -1; }
+        .form-campo.completo { grid-column: 1 / -1; }
         label { margin-bottom: 5px; font-size: 14px; font-weight: 500; }
         input, select, textarea { padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; background-color: #fff; font-size: 14px; font-family: inherit; }
         input[type="file"] { padding: 5px; background: #f1f5f9; border: 1px dashed #cbd5e1; }
@@ -36,6 +35,7 @@
 <body>
 
 <header>
+    <img src="logo.jpg" alt="Logo E.T.I." style="max-width: 110px; height: auto; margin-bottom: 10px; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2));">
     <h1>E.T.I. Capitán Anselmo Belloso</h1>
     <p class="subtitulo">Centro de Control de Estudio - Registro de Inscripción</p>
 </header>
@@ -54,7 +54,6 @@
     
     <form id="formularioCenso">
         
-        <!-- SECCIÓN 1: DATOS DEL REPRESENTANTE -->
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
             <div class="grid-form">
@@ -135,7 +134,6 @@
             </div>
         </fieldset>
 
-        <!-- SECCIÓN 2: DATOS DEL ALUMNO -->
         <fieldset>
             <legend>2. Datos del Alumno / Aspirante</legend>
             <div class="grid-form">
@@ -172,18 +170,14 @@
                     <label for="carrera_cursar">Carrera / Especialidad y Mención a Cursar:</label>
                     <select id="carrera_cursar" name="carrera_cursar" required>
                         <option value="">Seleccione la opción que necesita...</option>
-                        <!-- Especialidad Transporte -->
                         <option value="Especialidad Transporte-Multimodal">Especialidad Transporte - Multimodal</option>
                         <option value="Especialidad Transporte Terrestre">Especialidad Transporte - Terrestre</option>
-                        <!-- Especialidad Industrial -->
                         <option value="Especialidad Industrial - Mención Metalmecánica">Especialidad Industrial - Mención Metalmecánica</option>
                         <option value="Especialidad Industrial - Mención Electrónica">Especialidad Industrial - Mención Electrónica</option>
                         <option value="Especialidad Industrial - Mención Mecánica Térmica">Especialidad Industrial - Mención Mecánica Térmica</option>
                         <option value="Especialidad Industrial - Mención Química Industrial">Especialidad Industrial - Mención Química Industrial</option>
-                        <!-- Especialidad Hidrocarburos -->
                         <option value="Especialidad Hidrocarburos - Mención Refinación y Petroquímica">Especialidad Hidrocarburos - Mención Refinación y Petroquímica</option>
                         <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
-                        <!-- Especialidad Agropecuaria -->
                         <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
                     </select>
                 </div>
@@ -210,9 +204,8 @@ document.getElementById('formularioCenso').addEventListener('submit', function(e
     boton.innerText = "Procesando y enviando archivos...";
     boton.disabled = true;
 
-    // EmailJS lee el formulario directamente con "this" incluyendo los archivos binarios
-    // REEMPLAZA "TU_SERVICE_ID" Y "TU_TEMPLATE_ID" por tus llaves reales
-    emailjs.sendForm('TU_SERVICE_ID', 'TU_TEMPLATE_ID', this)
+    // Conexión establecida directamente con tus credenciales reales
+    emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', this)
         .then(function() {
             alert('¡Censo y documentos recibidos con éxito en el correo del plantel!');
             document.getElementById('formularioCenso').reset();
