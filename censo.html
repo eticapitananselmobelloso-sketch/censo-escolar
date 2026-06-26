@@ -121,7 +121,7 @@
                 </div>
                 <div class="form-campo">
                     <label for="foto_rep">Adjuntar Foto del Representante:</label>
-                    <input type="file" id="foto_rep" name="foto_rep" required accept="image/*">
+                    <input type="file" id="foto_rep" required accept="image/*">
                 </div>
                 <div class="form-campo completo">
                     <label for="direccion_rep">Dirección Completa de Habitación:</label>
@@ -175,10 +175,13 @@
                 </div>
                 <div class="form-campo">
                     <label for="foto_alumno">Adjuntar Foto del Aspirante (Tipo Carnet):</label>
-                    <input type="file" id="foto_alumno" name="foto_alumno" required accept="image/*">
+                    <input type="file" id="foto_alumno" required accept="image/*">
                 </div>
             </div>
         </fieldset>
+
+        <input type="hidden" id="adjunto_foto_rep" name="adjunto_foto_rep">
+        <input type="hidden" id="adjunto_foto_alumno" name="adjunto_foto_alumno">
 
         <button type="submit" class="btn-bloque">Enviar Preinscripción al Plantel</button>
     </form>
@@ -189,7 +192,6 @@
 </footer>
 
 <script>
-// Función optimizada para comprimir imágenes del lado del cliente en el navegador
 function procesarYComprimir(file, maxWidth, maxHeight, callback) {
     if (!file) {
         callback("");
@@ -222,8 +224,8 @@ function procesarYComprimir(file, maxWidth, maxHeight, callback) {
             canvas.height = height;
             ctx.drawImage(img, 0, 0, width, height);
             
-            // Forzamos compresión JPEG al 60% para garantizar ligereza extrema (< 30KB)
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+            // Bajamos al 40% de calidad JPEG para asegurar que el string de texto sea diminuto (<15KB)
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.4);
             callback(dataUrl);
         };
     };
@@ -232,44 +234,28 @@ function procesarYComprimir(file, maxWidth, maxHeight, callback) {
 document.getElementById('formularioCenso').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const boton = e.target.querySelector('.btn-bloque');
-    boton.innerText = "Optimizando imágenes y enviando...";
+    const formulario = this;
+    const boton = formulario.querySelector('.btn-bloque');
+    boton.innerText = "Optimizando imágenes y enviando de forma segura...";
     boton.disabled = true;
 
     const archivoFotoRep = document.getElementById('foto_rep').files[0];
     const archivoFotoAlumno = document.getElementById('foto_alumno').files[0];
 
-    // 1. Procesamos la foto del representante
-    procesarYComprimir(archivoFotoRep, 400, 400, function(base64Rep) {
-        // 2. Procesamos la foto del alumno
-        procesarYComprimir(archivoFotoAlumno, 400, 400, function(base64Alumno) {
+    // 1. Procesar foto representante (Tamaño objetivo pequeño)
+    procesarYComprimir(archivoFotoRep, 250, 250, function(base64Rep) {
+        // 2. Procesar foto alumno (Tamaño objetivo pequeño)
+        procesarYComprimir(archivoFotoAlumno, 250, 250, function(base64Alumno) {
             
-            // Estructura de parámetros limpia y exacta para coincidir con el script de Python
-            const parametrosEnvio = {
-                nombre_rep: document.getElementById('nombre_rep').value,
-                nacionalidad_rep: document.getElementById('nacionalidad_rep').value,
-                cedula_rep: document.getElementById('cedula_rep').value,
-                correo_rep: document.getElementById('correo_rep').value,
-                telefono_rep: document.getElementById('telefono_rep').value,
-                pais_origen: document.getElementById('pais_origen').value,
-                estado_rep: document.getElementById('estado_rep').value,
-                parroquia_rep: document.getElementById('parroquia_rep').value,
-                direccion_rep: document.getElementById('direccion_rep').value,
-                nombre_alumno: document.getElementById('nombre_alumno').value,
-                apellido_alumno: document.getElementById('apellido_alumno').value,
-                edad_alumno: document.getElementById('edad_alumno').value,
-                cedula_alumno: document.getElementById('cedula_alumno').value || "No posee",
-                tipo_ingreso: document.getElementById('tipo_ingreso').value,
-                carrera_cursar: document.getElementById('carrera_cursar').value,
-                adjunto_foto_rep: base64Rep,
-                adjunto_foto_alumno: base64Alumno
-            };
+            // Asignamos las imágenes optimizadas a los inputs ocultos correspondientes
+            document.getElementById('adjunto_foto_rep').value = base64Rep;
+            document.getElementById('adjunto_foto_alumno').value = base64Alumno;
 
-            // Envío seguro a EmailJS
-            emailjs.send('service_yy7ndju', 'template_zbbcxqf', parametrosEnvio)
+            // Envío del formulario completo a través de sendForm
+            emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', formulario)
                 .then(function() {
-                    alert('¡Censo y documentos optimizados con éxito en el correo del plantel!');
-                    document.getElementById('formularioCenso').reset();
+                    alert('¡Censo recibido con éxito y optimizado en el correo del plantel!');
+                    formulario.reset();
                 }, function(error) {
                     alert('Error crítico en el envío: ' + JSON.stringify(error));
                 })
