@@ -6,7 +6,6 @@
     <title>E.T.I. Capítan Anselmo Belloso - Censo Completo</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
-        // Inicialización oficial con tu clave pública
         emailjs.init("c7LgpYNxzNZruqQpF");
     </script>
     <style>
@@ -50,134 +49,55 @@
 
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar Avanzado</h2>
-    <p style="margin-bottom: 25px; color: #475569;">Complete de manera exacta todos los campos obligatorios. Los documentos adjuntos serán recibidos directamente en el correo del plantel.</p>
-    
     <form id="formularioCenso">
         <input type="hidden" name="to_email" value="e.t.icapitananselmobelloso@gmail.com">
         
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
             <div class="grid-form">
-                <div class="form-campo">
-                    <label for="nombre_rep">Nombres y Apellidos:</label>
-                    <input type="text" id="nombre_rep" name="nombre_rep" required placeholder="Ej. Carlos Mendoza">
-                </div>
-                <div class="form-campo">
-                    <label for="nacionalidad_rep">Nacionalidad:</label>
-                    <select id="nacionalidad_rep" name="nacionalidad_rep" required>
-                        <option value="">Seleccione...</option>
-                        <option value="Venezolano">Venezolano/a</option>
-                        <option value="Extranjero">Extranjero/a</option>
-                    </select>
-                </div>
-                <div class="form-campo">
-                    <label for="cedula_rep">Cédula o Pasaporte:</label>
-                    <input type="text" id="cedula_rep" name="cedula_rep" required placeholder="Ej. V-12345678">
-                </div>
-                <div class="form-campo">
-                    <label for="correo_rep">Correo Electrónico:</label>
-                    <input type="email" id="correo_rep" name="correo_rep" required placeholder="ejemplo@correo.com">
-                </div>
-                <div class="form-campo">
-                    <label for="telefono_rep">Teléfono Móvil:</label>
-                    <input type="tel" id="telefono_rep" name="telefono_rep" required placeholder="Ej. 0412-1234567">
-                </div>
-                <div class="form-campo">
-                    <label for="pais_origen">País de Origen:</label>
-                    <input type="text" id="pais_origen" name="pais_origen" required placeholder="Ej. Venezuela">
-                </div>
-                <div class="form-campo">
-                    <label for="estado_rep">Estado (Venezuela):</label>
-                    <select id="estado_rep" name="estado_rep" required>
-                        <option value="">Seleccione...</option>
-                        <option value="Zulia">Zulia</option>
-                        <option value="Amazonas">Amazonas</option>
-                        <option value="Anzoátegui">Anzoátegui</option>
-                        <option value="Apure">Apure</option>
-                        <option value="Aragua">Aragua</option>
-                        <option value="Barinas">Barinas</option>
-                        <option value="Bolívar">Bolívar</option>
-                        <option value="Carabobo">Carabobo</option>
-                        <option value="Cojedes">Cojedes</option>
-                        <option value="Delta Amacuro">Delta Amacuro</option>
-                        <option value="Distrito Capital">Distrito Capital</option>
-                        <option value="Falcón">Falcón</option>
-                        <option value="Guárico">Guárico</option>
-                        <option value="Lara">Lara</option>
-                        <option value="Mérida">Mérida</option>
-                        <option value="Miranda">Miranda</option>
-                        <option value="Monagas">Monagas</option>
-                        <option value="Nueva Esparta">Nueva Esparta</option>
-                        <option value="Portuguesa">Portuguesa</option>
-                        <option value="Sucre">Sucre</option>
-                        <option value="Táchira">Táchira</option>
-                        <option value="Trujillo">Trujillo</option>
-                        <option value="Vargas">Vargas (La Guaira)</option>
-                        <option value="Yaracuy">Yaracuy</option>
-                    </select>
-                </div>
-                <div class="form-campo">
-                    <label for="parroquia_rep">Parroquia de Habitación:</label>
-                    <input type="text" id="parroquia_rep" name="parroquia_rep" required placeholder="Ej. San Francisco / Coquivacoa">
-                </div>
-                <div class="form-campo">
-                    <label for="foto_rep">Adjuntar Foto del Representante:</label>
-                    <input type="file" id="foto_rep" required accept="image/*">
-                </div>
-                <div class="form-campo completo">
-                    <label for="direccion_rep">Dirección Completa de Habitación:</label>
-                    <textarea id="direccion_rep" name="direccion_rep" rows="2" required placeholder="Sector, Avenida, Calle, Número de casa..."></textarea>
-                </div>
+                <div class="form-campo"><label for="nombre_rep">Nombres y Apellidos:</label><input type="text" id="nombre_rep" name="nombre_rep" required></div>
+                <div class="form-campo"><label for="nacionalidad_rep">Nacionalidad:</label><select id="nacionalidad_rep" name="nacionalidad_rep" required><option value="Venezolano">Venezolano/a</option><option value="Extranjero">Extranjero/a</option></select></div>
+                <div class="form-campo"><label for="cedula_rep">Cédula o Pasaporte:</label><input type="text" id="cedula_rep" name="cedula_rep" required></div>
+                <div class="form-campo"><label for="correo_rep">Correo Electrónico:</label><input type="email" id="correo_rep" name="correo_rep" required></div>
+                <div class="form-campo"><label for="telefono_rep">Teléfono Móvil:</label><input type="tel" id="telefono_rep" name="telefono_rep" required></div>
+                <div class="form-campo"><label for="pais_origen">País de Origen:</label><input type="text" id="pais_origen" name="pais_origen" required></div>
+                <div class="form-campo"><label for="estado_rep">Estado:</label><select id="estado_rep" name="estado_rep" required>
+                    <option value="Zulia">Zulia</option><option value="Amazonas">Amazonas</option><option value="Anzoátegui">Anzoátegui</option>
+                    <option value="Apure">Apure</option><option value="Aragua">Aragua</option><option value="Barinas">Barinas</option>
+                    <option value="Bolívar">Bolívar</option><option value="Carabobo">Carabobo</option><option value="Cojedes">Cojedes</option>
+                    <option value="Delta Amacuro">Delta Amacuro</option><option value="Distrito Capital">Distrito Capital</option>
+                    <option value="Falcón">Falcón</option><option value="Guárico">Guárico</option><option value="Lara">Lara</option>
+                    <option value="Mérida">Mérida</option><option value="Miranda">Miranda</option><option value="Monagas">Monagas</option>
+                    <option value="Nueva Esparta">Nueva Esparta</option><option value="Portuguesa">Portuguesa</option><option value="Sucre">Sucre</option>
+                    <option value="Táchira">Táchira</option><option value="Trujillo">Trujillo</option><option value="Vargas">Vargas (La Guaira)</option>
+                    <option value="Yaracuy">Yaracuy</option>
+                </select></div>
+                <div class="form-campo"><label for="parroquia_rep">Parroquia de Habitación:</label><input type="text" id="parroquia_rep" name="parroquia_rep" required></div>
+                <div class="form-campo"><label for="foto_rep">Foto del Representante:</label><input type="file" id="foto_rep" accept="image/*" required></div>
+                <div class="form-campo completo"><label for="direccion_rep">Dirección Completa:</label><textarea id="direccion_rep" name="direccion_rep" rows="2" required></textarea></div>
             </div>
         </fieldset>
 
         <fieldset>
             <legend>2. Datos del Alumno / Aspirante</legend>
             <div class="grid-form">
-                <div class="form-campo">
-                    <label for="nombre_alumno">Nombres del Alumno:</label>
-                    <input type="text" id="nombre_alumno" name="nombre_alumno" required placeholder="Nombres">
-                </div>
-                <div class="form-campo">
-                    <label for="apellido_alumno">Apellidos del Alumno:</label>
-                    <input type="text" id="apellido_alumno" name="apellido_alumno" required placeholder="Apellidos">
-                </div>
-                <div class="form-campo">
-                    <label for="edad_alumno">Edad:</label>
-                    <input type="number" id="edad_alumno" name="edad_alumno" required min="10" max="25" placeholder="Ej. 15">
-                </div>
-                <div class="form-campo">
-                    <label for="cedula_alumno">Cédula del Alumno (Si posee):</label>
-                    <input type="text" id="cedula_alumno" name="cedula_alumno" placeholder="Ej. V-31234567">
-                </div>
-                <div class="form-campo">
-                    <label for="tipo_ingreso">Tipo de Ingreso:</label>
-                    <select id="tipo_ingreso" name="tipo_ingreso" required>
-                        <option value="">Seleccione...</option>
-                        <option value="Nuevo Estudiante">Nuevo Estudiante</option>
-                        <option value="Reincorporación">Reincorporación</option>
-                        <option value="Equivalencias">Equivalencias</option>
-                    </select>
-                </div>
-                <div class="form-campo completo">
-                    <label for="carrera_cursar">Carrera / Especialidad y Mención a Cursar:</label>
-                    <select id="carrera_cursar" name="carrera_cursar" required>
-                        <option value="">Seleccione la opción que necesita...</option>
-                        <option value="Especialidad Transporte-Multimodal">Especialidad Transporte - Multimodal</option>
-                        <option value="Especialidad Transporte Terrestre">Especialidad Transporte - Terrestre</option>
-                        <option value="Especialidad Industrial - Mención Metalmecánica">Especialidad Industrial - Mención Metalmecánica</option>
-                        <option value="Especialidad Industrial - Mención Electrónica">Especialidad Industrial - Mención Electrónica</option>
-                        <option value="Especialidad Industrial - Mención Mecánica Térmica">Especialidad Industrial - Mención Mecánica Térmica</option>
-                        <option value="Especialidad Industrial - Mención Química Industrial">Especialidad Industrial - Mención Química Industrial</option>
-                        <option value="Especialidad Hidrocarburos - Mención Refinación y Petroquímica">Especialidad Hidrocarburos - Mención Refinación y Petroquímica</option>
-                        <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
-                        <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
-                    </select>
-                </div>
-                <div class="form-campo">
-                    <label for="foto_alumno">Adjuntar Foto del Aspirante (Tipo Carnet):</label>
-                    <input type="file" id="foto_alumno" required accept="image/*">
-                </div>
+                <div class="form-campo"><label for="nombre_alumno">Nombres del Alumno:</label><input type="text" id="nombre_alumno" name="nombre_alumno" required></div>
+                <div class="form-campo"><label for="apellido_alumno">Apellidos del Alumno:</label><input type="text" id="apellido_alumno" name="apellido_alumno" required></div>
+                <div class="form-campo"><label for="edad_alumno">Edad:</label><input type="number" id="edad_alumno" name="edad_alumno" required min="10" max="25"></div>
+                <div class="form-campo"><label for="cedula_alumno">Cédula del Alumno:</label><input type="text" id="cedula_alumno" name="cedula_alumno"></div>
+                <div class="form-campo"><label for="tipo_ingreso">Tipo de Ingreso:</label><select id="tipo_ingreso" name="tipo_ingreso" required><option value="Nuevo Estudiante">Nuevo Estudiante</option><option value="Reincorporación">Reincorporación</option><option value="Equivalencias">Equivalencias</option></select></div>
+                <div class="form-campo completo"><label for="carrera_cursar">Carrera / Especialidad:</label><select id="carrera_cursar" name="carrera_cursar" required>
+                    <option value="Especialidad Transporte-Multimodal">Especialidad Transporte - Multimodal</option>
+                    <option value="Especialidad Transporte Terrestre">Especialidad Transporte - Terrestre</option>
+                    <option value="Especialidad Industrial - Mención Metalmecánica">Especialidad Industrial - Mención Metalmecánica</option>
+                    <option value="Especialidad Industrial - Mención Electrónica">Especialidad Industrial - Mención Electrónica</option>
+                    <option value="Especialidad Industrial - Mención Mecánica Térmica">Especialidad Industrial - Mención Mecánica Térmica</option>
+                    <option value="Especialidad Industrial - Mención Química Industrial">Especialidad Industrial - Mención Química Industrial</option>
+                    <option value="Especialidad Hidrocarburos - Mención Refinación y Petroquímica">Especialidad Hidrocarburos - Mención Refinación y Petroquímica</option>
+                    <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
+                    <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
+                </select></div>
+                <div class="form-campo"><label for="foto_alumno">Foto del Aspirante:</label><input type="file" id="foto_alumno" accept="image/*" required></div>
             </div>
         </fieldset>
 
@@ -188,76 +108,50 @@
     </form>
 </div>
 
-<footer>
-    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
-</footer>
+<footer>&copy; 2026 E.T.I. Capitán Anselmo Belloso</footer>
 
 <script>
-function procesarYComprimir(file, maxWidth, maxHeight, callback) {
-    if (!file) {
-        callback("");
-        return;
-    }
+function procesarYComprimir(file, callback) {
+    if (!file) { callback(""); return; }
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = function(event) {
+    reader.onload = function(e) {
         const img = new Image();
-        img.src = event.target.result;
+        img.src = e.target.result;
         img.onload = function() {
             const canvas = document.createElement('canvas');
+            canvas.width = 400; canvas.height = 400;
             const ctx = canvas.getContext('2d');
-            
-            let width = img.width;
-            let height = img.height;
-
-            if (width > height) {
-                if (width > maxWidth) {
-                    height *= maxWidth / width;
-                    width = maxWidth;
-                }
-            } else {
-                if (height > maxHeight) {
-                    width *= maxHeight / height;
-                    height = maxHeight;
-                }
-            }
-            canvas.width = width;
-            canvas.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
-            
-            const dataUrl = canvas.toDataURL('image/jpeg', 0.4);
-            callback(dataUrl);
+            ctx.drawImage(img, 0, 0, 400, 400);
+            callback(canvas.toDataURL('image/jpeg', 0.5));
         };
     };
 }
 
 document.getElementById('formularioCenso').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    const formulario = this;
-    const boton = formulario.querySelector('.btn-bloque');
-    boton.innerText = "Optimizando imágenes y enviando de forma segura...";
-    boton.disabled = true;
+    const btn = this.querySelector('.btn-bloque');
+    btn.disabled = true; 
+    btn.innerText = "Procesando imágenes, espere...";
 
-    const archivoFotoRep = document.getElementById('foto_rep').files[0];
-    const archivoFotoAlumno = document.getElementById('foto_alumno').files[0];
+    const fileRep = document.getElementById('foto_rep').files[0];
+    const fileAlumno = document.getElementById('foto_alumno').files[0];
 
-    procesarYComprimir(archivoFotoRep, 250, 250, function(base64Rep) {
-        procesarYComprimir(archivoFotoAlumno, 250, 250, function(base64Alumno) {
-            
-            document.getElementById('adjunto_foto_rep').value = base64Rep;
-            document.getElementById('adjunto_foto_alumno').value = base64Alumno;
+    procesarYComprimir(fileRep, (b64R) => {
+        procesarYComprimir(fileAlumno, (b64A) => {
+            document.getElementById('adjunto_foto_rep').value = b64R;
+            document.getElementById('adjunto_foto_alumno').value = b64A;
 
-            emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', formulario)
-                .then(function() {
-                    alert('¡Censo recibido con éxito y optimizado en el correo del plantel!');
-                    formulario.reset();
-                }, function(error) {
-                    alert('Error crítico en el envío: ' + JSON.stringify(error));
+            emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', '#formularioCenso')
+                .then(() => { 
+                    alert("¡Censo enviado con éxito!"); 
+                    document.getElementById('formularioCenso').reset(); 
+                }, (err) => { 
+                    alert("Error en el envío: " + JSON.stringify(err)); 
                 })
-                .finally(function() {
-                    boton.innerText = "Enviar Preinscripción al Plantel";
-                    boton.disabled = false;
+                .finally(() => { 
+                    btn.disabled = false; 
+                    btn.innerText = "Enviar Preinscripción al Plantel"; 
                 });
         });
     });
