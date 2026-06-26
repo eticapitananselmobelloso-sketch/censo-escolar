@@ -74,10 +74,6 @@
                     <input type="text" id="cedula_rep" name="cedula_rep" required placeholder="Ej. V-12345678">
                 </div>
                 <div class="form-campo">
-                    <label for="doc_identidad_rep">Adjuntar Documento de Identidad (Copia de Cédula/Pasaporte):</label>
-                    <input type="file" id="doc_identidad_rep" name="doc_identidad_rep" required accept="image/*,.pdf">
-                </div>
-                <div class="form-campo">
                     <label for="correo_rep">Correo Electrónico:</label>
                     <input type="email" id="correo_rep" name="correo_rep" required placeholder="ejemplo@correo.com">
                 </div>
@@ -154,10 +150,6 @@
                     <input type="text" id="cedula_alumno" name="cedula_alumno" placeholder="Ej. V-31234567">
                 </div>
                 <div class="form-campo">
-                    <label for="doc_identidad_alumno">Adjuntar Cédula del Alumno (Opcional):</label>
-                    <input type="file" id="doc_identidad_alumno" name="doc_identidad_alumno" accept="image/*,.pdf">
-                </div>
-                <div class="form-campo">
                     <label for="tipo_ingreso">Tipo de Ingreso:</label>
                     <select id="tipo_ingreso" name="tipo_ingreso" required>
                         <option value="">Seleccione...</option>
@@ -197,25 +189,96 @@
 </footer>
 
 <script>
+// Función optimizada para comprimir imágenes del lado del cliente en el navegador
+function procesarYComprimir(file, maxWidth, maxHeight, callback) {
+    if (!file) {
+        callback("");
+        return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            ctx.drawImage(img, 0, 0, width, height);
+            
+            // Forzamos compresión JPEG al 60% para garantizar ligereza extrema (< 30KB)
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+            callback(dataUrl);
+        };
+    };
+}
+
 document.getElementById('formularioCenso').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const boton = e.target.querySelector('.btn-bloque');
-    boton.innerText = "Procesando y enviando archivos...";
+    boton.innerText = "Optimizando imágenes y enviando...";
     boton.disabled = true;
 
-    // Conexión establecida directamente con tus credenciales reales
-    emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', this)
-        .then(function() {
-            alert('¡Censo y documentos recibidos con éxito en el correo del plantel!');
-            document.getElementById('formularioCenso').reset();
-        }, function(error) {
-            alert('Fallo en el envío: ' + JSON.stringify(error));
-        })
-        .finally(function() {
-            boton.innerText = "Enviar Preinscripción al Plantel";
-            boton.disabled = false;
+    const archivoFotoRep = document.getElementById('foto_rep').files[0];
+    const archivoFotoAlumno = document.getElementById('foto_alumno').files[0];
+
+    // 1. Procesamos la foto del representante
+    procesarYComprimir(archivoFotoRep, 400, 400, function(base64Rep) {
+        // 2. Procesamos la foto del alumno
+        procesarYComprimir(archivoFotoAlumno, 400, 400, function(base64Alumno) {
+            
+            // Estructura de parámetros limpia y exacta para coincidir con el script de Python
+            const parametrosEnvio = {
+                nombre_rep: document.getElementById('nombre_rep').value,
+                nacionalidad_rep: document.getElementById('nacionalidad_rep').value,
+                cedula_rep: document.getElementById('cedula_rep').value,
+                correo_rep: document.getElementById('correo_rep').value,
+                telefono_rep: document.getElementById('telefono_rep').value,
+                pais_origen: document.getElementById('pais_origen').value,
+                estado_rep: document.getElementById('estado_rep').value,
+                parroquia_rep: document.getElementById('parroquia_rep').value,
+                direccion_rep: document.getElementById('direccion_rep').value,
+                nombre_alumno: document.getElementById('nombre_alumno').value,
+                apellido_alumno: document.getElementById('apellido_alumno').value,
+                edad_alumno: document.getElementById('edad_alumno').value,
+                cedula_alumno: document.getElementById('cedula_alumno').value || "No posee",
+                tipo_ingreso: document.getElementById('tipo_ingreso').value,
+                carrera_cursar: document.getElementById('carrera_cursar').value,
+                adjunto_foto_rep: base64Rep,
+                adjunto_foto_alumno: base64Alumno
+            };
+
+            // Envío seguro a EmailJS
+            emailjs.send('service_yy7ndju', 'template_zbbcxqf', parametrosEnvio)
+                .then(function() {
+                    alert('¡Censo y documentos optimizados con éxito en el correo del plantel!');
+                    document.getElementById('formularioCenso').reset();
+                }, function(error) {
+                    alert('Error crítico en el envío: ' + JSON.stringify(error));
+                })
+                .finally(function() {
+                    boton.innerText = "Enviar Preinscripción al Plantel";
+                    boton.disabled = false;
+                });
         });
+    });
 });
 </script>
 </body>
