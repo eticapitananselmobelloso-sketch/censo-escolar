@@ -53,6 +53,7 @@
     <p style="margin-bottom: 25px; color: #475569;">Complete de manera exacta todos los campos obligatorios. Los documentos adjuntos serán recibidos directamente en el correo del plantel.</p>
     
     <form id="formularioCenso">
+        <input type="hidden" name="to_email" value="e.t.icapitananselmobelloso@gmail.com">
         
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
@@ -224,7 +225,6 @@ function procesarYComprimir(file, maxWidth, maxHeight, callback) {
             canvas.height = height;
             ctx.drawImage(img, 0, 0, width, height);
             
-            // Bajamos al 40% de calidad JPEG para asegurar que el string de texto sea diminuto (<15KB)
             const dataUrl = canvas.toDataURL('image/jpeg', 0.4);
             callback(dataUrl);
         };
@@ -242,16 +242,12 @@ document.getElementById('formularioCenso').addEventListener('submit', function(e
     const archivoFotoRep = document.getElementById('foto_rep').files[0];
     const archivoFotoAlumno = document.getElementById('foto_alumno').files[0];
 
-    // 1. Procesar foto representante (Tamaño objetivo pequeño)
     procesarYComprimir(archivoFotoRep, 250, 250, function(base64Rep) {
-        // 2. Procesar foto alumno (Tamaño objetivo pequeño)
         procesarYComprimir(archivoFotoAlumno, 250, 250, function(base64Alumno) {
             
-            // Asignamos las imágenes optimizadas a los inputs ocultos correspondientes
             document.getElementById('adjunto_foto_rep').value = base64Rep;
             document.getElementById('adjunto_foto_alumno').value = base64Alumno;
 
-            // Envío del formulario completo a través de sendForm
             emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', formulario)
                 .then(function() {
                     alert('¡Censo recibido con éxito y optimizado en el correo del plantel!');
