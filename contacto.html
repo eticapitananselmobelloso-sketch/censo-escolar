@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E.T.I. Capítan Anselmo Belloso - Contacto</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f7f9fa; 
+            color: #333; 
+            line-height: 1.6; 
+        }
+        header { 
+            background-color: #1e3a8a; 
+            color: white; 
+            padding: 25px; 
+            text-align: center; 
+        }
+        h1 { margin: 0; font-size: 26px; }
+        p.subtitulo { margin: 5px 0 0 0; color: #bfdbfe; font-size: 14px; }
+        
+        nav { 
+            background-color: #0f172a; 
+            text-align: center; 
+            position: sticky;
+            top: 0;
+        }
+        nav a { 
+            display: inline-block; 
+            color: #cbd5e1; 
+            padding: 14px 20px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 15px; 
+        }
+        nav a:hover { 
+            background-color: #1e293b; 
+            color: white; 
+        }
+        nav a.active { 
+            background-color: #2563eb; 
+            color: white; 
+        }
+
+        .container { 
+            max-width: 800px; 
+            margin: 30px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 6px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+        }
+        h2 { 
+            color: #1e3a8a; 
+            border-bottom: 2px solid #e2e8f0; 
+            padding-bottom: 8px; 
+            margin-top: 0; 
+        }
+        .info-contacto {
+            margin-bottom: 25px;
+        }
+        .info-contacto p {
+            margin: 8px 0;
+        }
+        .form-grupo {
+            margin-bottom: 15px;
+        }
+        .form-grupo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+        .form-grupo input, .form-grupo textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .btn-enviar {
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-enviar:hover {
+            background-color: #1e40af;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #666;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>E.T.I. Capitán Anselmo Belloso</h1>
+    <p class="subtitulo">Centro de Control de Estudio e Información</p>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="censo.html">Censo</a>
+    <a href="noticias.html">Noticias</a>
+    <a href="direccion.html">Dirección</a>
+    <a href="contacto.html" class="active">Contacto</a>
+</nav>
+
+<div class="container">
+    <h2>Atención al Ciudadano y Canales Oficiales</h2>
+    <p>Si tienes alguna duda sobre las inscripciones, solicitudes de documentos o necesitas contactar con algún departamento, puedes usar los siguientes medios o enviarnos un mensaje directo.</p>
+    
+    <div class="info-contacto">
+        <p><strong>📍 Dirección:</strong> San Francisco, Estado Zulia, Venezuela.</p>
+        <p><strong>📧 Correo Electrónico:</strong> info@eticapitananselmobelloso.com</p>
+        <p><strong>⏰ Horario de Atención:</strong> Lunes a Viernes de 8:00 a.m. a 12:00 m. y de 1:00 p.m. a 5:00 p.m.</p>
+    </div>
+
+    <h2>Enviar un Mensaje</h2>
+    <form onsubmit="alert('¡Mensaje simulado con éxito! Integración futura con el servidor.'); return false;">
+        <div class="form-grupo">
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" required placeholder="Ej. Juan Pérez">
+        </div>
+        <div class="form-grupo">
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" required placeholder="Ej. juan@correo.com">
+        </div>
+        <div class="form-grupo">
+            <label for="mensaje">Mensaje o Consulta:</label>
+            <textarea id="mensaje" rows="5" required placeholder="Escriba su mensaje aquí..."></textarea>
+        </div>
+        <button type="submit" class="btn-enviar">Enviar Mensaje</button>
+    </form>
+</div>
+
+<footer>
+    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
