@@ -9,6 +9,7 @@
         emailjs.init("c7LgpYNxzNZruqQpF");
     </script>
     <style>
+        /* ... (tus estilos permanecen iguales) ... */
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f7f9fa; color: #333; line-height: 1.6; }
         header { background-color: #1e3a8a; color: white; padding: 25px; text-align: center; }
         h1 { margin: 0; font-size: 26px; }
@@ -73,7 +74,7 @@
                     <option value="Yaracuy">Yaracuy</option>
                 </select></div>
                 <div class="form-campo"><label for="parroquia_rep">Parroquia de Habitación:</label><input type="text" id="parroquia_rep" name="parroquia_rep" required></div>
-                <div class="form-campo"><label for="foto_rep">Foto del Representante:</label><input type="file" id="foto_rep" accept="image/*" required></div>
+                <div class="form-campo"><label for="foto_rep">Foto del Representante:</label><input type="file" id="foto_rep" name="foto_rep" accept="image/*" required></div>
                 <div class="form-campo completo"><label for="direccion_rep">Dirección Completa:</label><textarea id="direccion_rep" name="direccion_rep" rows="2" required></textarea></div>
             </div>
         </fieldset>
@@ -97,12 +98,9 @@
                     <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
                     <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
                 </select></div>
-                <div class="form-campo"><label for="foto_alumno">Foto del Aspirante:</label><input type="file" id="foto_alumno" accept="image/*" required></div>
+                <div class="form-campo"><label for="foto_alumno">Foto del Aspirante:</label><input type="file" id="foto_alumno" name="foto_alumno" accept="image/*" required></div>
             </div>
         </fieldset>
-
-        <input type="hidden" id="adjunto_foto_rep" name="adjunto_foto_rep">
-        <input type="hidden" id="adjunto_foto_alumno" name="adjunto_foto_alumno">
 
         <button type="submit" class="btn-bloque">Enviar Preinscripción al Plantel</button>
     </form>
@@ -111,50 +109,25 @@
 <footer>&copy; 2026 E.T.I. Capitán Anselmo Belloso</footer>
 
 <script>
-function procesarYComprimir(file, callback) {
-    if (!file) { callback(""); return; }
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function(e) {
-        const img = new Image();
-        img.src = e.target.result;
-        img.onload = function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = 400; canvas.height = 400;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, 400, 400);
-            callback(canvas.toDataURL('image/jpeg', 0.5));
-        };
-    };
-}
-
 document.getElementById('formularioCenso').addEventListener('submit', function(e) {
     e.preventDefault();
     const btn = this.querySelector('.btn-bloque');
     btn.disabled = true; 
-    btn.innerText = "Procesando imágenes, espere...";
+    btn.innerText = "Enviando, espere...";
 
-    const fileRep = document.getElementById('foto_rep').files[0];
-    const fileAlumno = document.getElementById('foto_alumno').files[0];
-
-    procesarYComprimir(fileRep, (b64R) => {
-        procesarYComprimir(fileAlumno, (b64A) => {
-            document.getElementById('adjunto_foto_rep').value = b64R;
-            document.getElementById('adjunto_foto_alumno').value = b64A;
-
-            emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', '#formularioCenso')
-                .then(() => { 
-                    alert("¡Censo enviado con éxito!"); 
-                    document.getElementById('formularioCenso').reset(); 
-                }, (err) => { 
-                    alert("Error en el envío: " + JSON.stringify(err)); 
-                })
-                .finally(() => { 
-                    btn.disabled = false; 
-                    btn.innerText = "Enviar Preinscripción al Plantel"; 
-                });
+    // Enviamos el formulario directamente. 
+    // EmailJS gestionará las fotos como adjuntos nativos.
+    emailjs.sendForm('service_yy7ndju', 'template_zbbcxqf', this)
+        .then(() => { 
+            alert("¡Censo enviado con éxito!"); 
+            this.reset(); 
+        }, (err) => { 
+            alert("Error en el envío: " + JSON.stringify(err)); 
+        })
+        .finally(() => { 
+            btn.disabled = false; 
+            btn.innerText = "Enviar Preinscripción al Plantel"; 
         });
-    });
 });
 </script>
 </body>
