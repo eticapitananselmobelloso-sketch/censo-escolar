@@ -24,6 +24,7 @@
         label { margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #475569; }
         input, select, textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
         .btn-bloque { display: block; width: 100%; background-color: var(--color-secundario); color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .info-limite { font-size: 11px; color: #d97706; margin-top: 4px; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -48,6 +49,8 @@
     <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Nuevo Registro de Censo ETI">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://eticapitananselmobelloso-sketch.github.io/index.html">
         
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
@@ -58,22 +61,32 @@
                 <div class="form-campo"><label>Correo Electrónico:</label><input type="email" name="email_rep" required></div>
                 <div class="form-campo"><label>Teléfono Móvil:</label><input type="tel" name="telefono_rep" required></div>
                 <div class="form-campo"><label>País de Origen:</label><input type="text" name="pais_origen" required></div>
-                <div class="form-campo"><label>Estado:</label><select name="estado_rep">
-                    <option value="Zulia">Zulia</option><option value="Amazonas">Amazonas</option><option value="Anzoátegui">Anzoátegui</option>
-                    <option value="Apure">Apure</option><option value="Aragua">Aragua</option><option value="Barinas">Barinas</option>
-                    <option value="Bolívar">Bolívar</option><option value="Carabobo">Carabobo</option><option value="Cojedes">Cojedes</option>
-                    <option value="Delta Amacuro">Delta Amacuro</option><option value="Distrito Capital">Distrito Capital</option>
-                    <option value="Falcón">Falcón</option><option value="Guárico">Guárico</option><option value="Lara">Lara</option>
-                    <option value="Mérida">Mérida</option><option value="Miranda">Miranda</option><option value="Monagas">Monagas</option>
-                    <option value="Nueva Esparta">Nueva Esparta</option><option value="Portuguesa">Portuguesa</option><option value="Sucre">Sucre</option>
-                    <option value="Táchira">Táchira</option><option value="Trujillo">Trujillo</option><option value="Vargas">Vargas (La Guaira)</option>
-                    <option value="Yaracuy">Yaracuy</option>
-                </select></div>
-                <div class="form-campo"><label>Parroquia de Habitación:</label><input type="text" name="parroquia_rep" required></div>
-                <div class="form-campo">
-                    <label>Adjuntar Documento/Foto Representante:</label>
-                    <input type="file" name="attachment" accept="image/*,application/pdf" required>
+                <div class="form-campo"><label>Estado:</label>
+                    <select name="estado_rep">
+                        <option value="Zulia">Zulia</option><option value="Amazonas">Amazonas</option><option value="Anzoátegui">Anzoátegui</option>
+                        <option value="Apure">Apure</option><option value="Aragua">Aragua</option><option value="Barinas">Barinas</option>
+                        <option value="Bolívar">Bolívar</option><option value="Carabobo">Carabobo</option><option value="Cojedes">Cojedes</option>
+                        <option value="Delta Amacuro">Delta Amacuro</option><option value="Distrito Capital">Distrito Capital</option>
+                        <option value="Falcón">Falcón</option><option value="Guárico">Guárico</option><option value="Lara">Lara</option>
+                        <option value="Mérida">Mérida</option><option value="Miranda">Miranda</option><option value="Monagas">Monagas</option>
+                        <option value="Nueva Esparta">Nueva Esparta</option><option value="Portuguesa">Portuguesa</option><option value="Sucre">Sucre</option>
+                        <option value="Táchira">Táchira</option><option value="Trujillo">Trujillo</option><option value="Vargas">Vargas (La Guaira)</option>
+                        <option value="Yaracuy">Yaracuy</option>
+                    </select>
                 </div>
+                <div class="form-campo"><label>Parroquia de Habitación:</label><input type="text" name="parroquia_rep" required></div>
+                
+                <div class="form-campo">
+                    <label>Fotocopia Doc. Identidad:</label>
+                    <input type="file" name="doc_identidad_rep" accept="image/*,application/pdf" required>
+                    <div class="info-limite">* Máx: 5MB</div>
+                </div>
+                <div class="form-campo">
+                    <label>Foto del Representante:</label>
+                    <input type="file" name="foto_rep" accept="image/*" required>
+                    <div class="info-limite">* Máx: 5MB</div>
+                </div>
+                
                 <div class="form-campo completo"><label>Dirección Completa:</label><textarea name="direccion_rep" rows="2" required></textarea></div>
             </div>
         </fieldset>
@@ -85,21 +98,36 @@
                 <div class="form-campo"><label>Apellidos del Alumno:</label><input type="text" name="apellido_alumno" required></div>
                 <div class="form-campo"><label>Edad:</label><input type="number" name="edad_alumno" required min="10" max="25"></div>
                 <div class="form-campo"><label>Cédula del Alumno:</label><input type="text" name="cedula_alumno"></div>
-                <div class="form-campo"><label>Tipo de Ingreso:</label><select name="tipo_ingreso"><option value="Nuevo Estudiante">Nuevo Estudiante</option><option value="Reincorporación">Reincorporación</option><option value="Equivalencias">Equivalencias</option></select></div>
-                <div class="form-campo completo"><label>Carrera / Especialidad:</label><select name="carrera_cursar" required>
-                    <option value="Especialidad Transporte-Multimodal">Especialidad Transporte - Multimodal</option>
-                    <option value="Especialidad Transporte Terrestre">Especialidad Transporte - Terrestre</option>
-                    <option value="Especialidad Industrial - Mención Metalmecánica">Especialidad Industrial - Mención Metalmecánica</option>
-                    <option value="Especialidad Industrial - Mención Electrónica">Especialidad Industrial - Mención Electrónica</option>
-                    <option value="Especialidad Industrial - Mención Mecánica Térmica">Especialidad Industrial - Mención Mecánica Térmica</option>
-                    <option value="Especialidad Industrial - Mención Química Industrial">Especialidad Industrial - Mención Química Industrial</option>
-                    <option value="Especialidad Hidrocarburos - Mención Refinación y Petroquímica">Especialidad Hidrocarburos - Mención Refinación y Petroquímica</option>
-                    <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
-                    <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
-                </select></div>
+                <div class="form-campo"><label>Tipo de Ingreso:</label>
+                    <select name="tipo_ingreso">
+                        <option value="Nuevo Estudiante">Nuevo Estudiante</option>
+                        <option value="Reincorporación">Reincorporación</option>
+                        <option value="Equivalencias">Equivalencias</option>
+                    </select>
+                </div>
+                <div class="form-campo completo"><label>Carrera / Especialidad:</label>
+                    <select name="carrera_cursar" required>
+                        <option value="Especialidad Transporte-Multimodal">Especialidad Transporte - Multimodal</option>
+                        <option value="Especialidad Transporte Terrestre">Especialidad Transporte - Terrestre</option>
+                        <option value="Especialidad Industrial - Mención Metalmecánica">Especialidad Industrial - Mención Metalmecánica</option>
+                        <option value="Especialidad Industrial - Mención Electrónica">Especialidad Industrial - Mención Electrónica</option>
+                        <option value="Especialidad Industrial - Mención Mecánica Térmica">Especialidad Industrial - Mención Mecánica Térmica</option>
+                        <option value="Especialidad Industrial - Mención Química Industrial">Especialidad Industrial - Mención Química Industrial</option>
+                        <option value="Especialidad Hidrocarburos - Mención Refinación y Petroquímica">Especialidad Hidrocarburos - Mención Refinación y Petroquímica</option>
+                        <option value="Especialidad Hidrocarburos - Mención Petróleo y Gas">Especialidad Hidrocarburos - Mención Petróleo y Gas</option>
+                        <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
+                    </select>
+                </div>
+                
                 <div class="form-campo">
-                    <label>Adjuntar Documento/Foto Aspirante:</label>
-                    <input type="file" name="attachment" accept="image/*,application/pdf" required>
+                    <label>Partida Nac. o Doc. Identidad:</label>
+                    <input type="file" name="doc_identidad_alumno" accept="image/*,application/pdf" required>
+                    <div class="info-limite">* Máx: 5MB</div>
+                </div>
+                <div class="form-campo">
+                    <label>Foto del Alumno:</label>
+                    <input type="file" name="foto_alumno" accept="image/*" required>
+                    <div class="info-limite">* Máx: 5MB</div>
                 </div>
             </div>
         </fieldset>
