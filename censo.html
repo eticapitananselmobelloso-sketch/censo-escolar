@@ -46,11 +46,13 @@
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar</h2>
     
-    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data">
+    <!-- AÑADIDO: target="_blank" para asegurar el envío de archivos -->
+    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Nuevo Registro de Censo ETI">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://eticapitananselmobelloso-sketch.github.io/index.html">
+        <input type="hidden" name="_confirmation" value="true"> <!-- Fuerza envío de confirmación -->
         
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
