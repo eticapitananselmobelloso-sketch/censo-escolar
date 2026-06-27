@@ -3,108 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E.T.I. Capítan Anselmo Belloso - Contacto</title>
+    <title>E.T.I. Capitán Anselmo Belloso - Contacto</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f7f9fa; 
-            color: #333; 
-            line-height: 1.6; 
-        }
-        header { 
-            background-color: #1e3a8a; 
-            color: white; 
-            padding: 25px; 
-            text-align: center; 
-        }
-        h1 { margin: 0; font-size: 26px; }
-        p.subtitulo { margin: 5px 0 0 0; color: #bfdbfe; font-size: 14px; }
-        
-        nav { 
-            background-color: #0f172a; 
-            text-align: center; 
-            position: sticky;
-            top: 0;
-        }
-        nav a { 
-            display: inline-block; 
-            color: #cbd5e1; 
-            padding: 14px 20px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 15px; 
-        }
-        nav a:hover { 
-            background-color: #1e293b; 
-            color: white; 
-        }
-        nav a.active { 
-            background-color: #2563eb; 
-            color: white; 
+        :root {
+            --color-primario: #1e3a8a; /* Azul insignia */
+            --color-secundario: #d97706; /* Naranja/Oro logo */
+            --color-fondo: #f8fafc;
         }
 
-        .container { 
-            max-width: 800px; 
-            margin: 30px auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 6px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
-        }
-        h2 { 
-            color: #1e3a8a; 
-            border-bottom: 2px solid #e2e8f0; 
-            padding-bottom: 8px; 
-            margin-top: 0; 
-        }
-        .info-contacto {
-            margin-bottom: 25px;
-        }
-        .info-contacto p {
-            margin: 8px 0;
-        }
-        .form-grupo {
-            margin-bottom: 15px;
-        }
-        .form-grupo label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #1e3a8a;
-        }
-        .form-grupo input, .form-grupo textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .btn-enviar {
-            background-color: #2563eb;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .btn-enviar:hover {
-            background-color: #1e40af;
-        }
-        footer {
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--color-fondo); color: #333; line-height: 1.6; }
+
+        /* Cabecera profesional */
+        header { 
+            background: linear-gradient(135deg, var(--color-primario) 0%, #0f172a 100%); 
+            color: white; 
+            padding: 40px 20px; 
             text-align: center;
-            padding: 20px;
-            font-size: 13px;
-            color: #666;
-            margin-top: 40px;
         }
+        .logo-header { width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; border: 3px solid white; border-radius: 50%; padding: 5px; background: white; }
+        h1 { margin: 0; font-size: 32px; letter-spacing: -0.5px; }
+        p.subtitulo { margin: 5px 0 0 0; color: #cbd5e1; font-size: 16px; font-weight: 300; }
+
+        /* Menú elegante */
+        nav { 
+            background-color: white; 
+            text-align: center; 
+            padding: 15px 0;
+            position: sticky; top: 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        nav a { 
+            margin: 0 15px; text-decoration: none; font-weight: 700; color: var(--color-primario);
+            font-size: 14px; text-transform: uppercase; transition: color 0.3s;
+        }
+        nav a:hover, nav a.active { color: var(--color-secundario); border-bottom: 2px solid var(--color-secundario); padding-bottom: 4px; }
+
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 50px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h2 { color: var(--color-primario); border-left: 5px solid var(--color-secundario); padding-left: 15px; margin-bottom: 25px; }
+        
+        .form-grupo { margin-bottom: 15px; }
+        .form-grupo label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--color-primario); }
+        .form-grupo input, .form-grupo textarea { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        
+        .btn-enviar {
+            background-color: var(--color-secundario);
+            color: white; padding: 12px 30px; border: none; border-radius: 6px;
+            font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s;
+        }
+        .btn-enviar:hover { background-color: #b45309; }
+        
+        footer { text-align: center; padding: 40px; font-size: 14px; color: #64748b; }
     </style>
 </head>
 <body>
 
 <header>
+    <img src="logo.jpg" alt="Logo ETI" class="logo-header">
     <h1>E.T.I. Capitán Anselmo Belloso</h1>
     <p class="subtitulo">Centro de Control de Estudio e Información</p>
 </header>
@@ -118,35 +73,31 @@
 </nav>
 
 <div class="container">
-    <h2>Atención al Ciudadano y Canales Oficiales</h2>
-    <p>Si tienes alguna duda sobre las inscripciones, solicitudes de documentos o necesitas contactar con algún departamento, puedes usar los siguientes medios o enviarnos un mensaje directo.</p>
+    <h2>Contacto</h2>
+    <p>Para consultas sobre inscripciones o solicitudes de documentos, utiliza los siguientes canales:</p>
     
-    <div class="info-contacto">
-        <p><strong>📍 Dirección:</strong> San Francisco, Estado Zulia, Venezuela.</p>
-        <p><strong>📧 Correo Electrónico:</strong> info@eticapitananselmobelloso.com</p>
-        <p><strong>⏰ Horario de Atención:</strong> Lunes a Viernes de 8:00 a.m. a 12:00 m. y de 1:00 p.m. a 5:00 p.m.</p>
-    </div>
+    <p><strong>📧 Correo:</strong> e.t.icapitananselmobelloso@gmail.com</p>
 
-    <h2>Enviar un Mensaje</h2>
-    <form onsubmit="alert('¡Mensaje simulado con éxito! Integración futura con el servidor.'); return false;">
+    <h2>Enviar un Mensaje Directo</h2>
+    <form action="https://formspree.io/f/xojodyva" method="POST">
         <div class="form-grupo">
             <label for="nombre">Nombre Completo:</label>
-            <input type="text" id="nombre" required placeholder="Ej. Juan Pérez">
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Juan Pérez">
         </div>
         <div class="form-grupo">
-            <label for="correo">Correo Electrónico:</label>
-            <input type="email" id="correo" required placeholder="Ej. juan@correo.com">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required placeholder="Ej. juan@correo.com">
         </div>
         <div class="form-grupo">
-            <label for="mensaje">Mensaje o Consulta:</label>
-            <textarea id="mensaje" rows="5" required placeholder="Escriba su mensaje aquí..."></textarea>
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escriba su consulta aquí..."></textarea>
         </div>
         <button type="submit" class="btn-enviar">Enviar Mensaje</button>
     </form>
 </div>
 
 <footer>
-    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
+    &copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.
 </footer>
 
 </body>

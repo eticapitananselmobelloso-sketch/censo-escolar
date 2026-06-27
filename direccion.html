@@ -3,84 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E.T.I. Capítan Anselmo Belloso - Dirección</title>
+    <title>E.T.I. Capitán Anselmo Belloso - Dirección</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f7f9fa; 
-            color: #333; 
-            line-height: 1.6; 
-        }
-        header { 
-            background-color: #1e3a8a; 
-            color: white; 
-            padding: 25px; 
-            text-align: center; 
-        }
-        h1 { margin: 0; font-size: 26px; }
-        p.subtitulo { margin: 5px 0 0 0; color: #bfdbfe; font-size: 14px; }
-        
-        nav { 
-            background-color: #0f172a; 
-            text-align: center; 
-            position: sticky;
-            top: 0;
-        }
-        nav a { 
-            display: inline-block; 
-            color: #cbd5e1; 
-            padding: 14px 20px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 15px; 
-        }
-        nav a:hover { 
-            background-color: #1e293b; 
-            color: white; 
-        }
-        nav a.active { 
-            background-color: #2563eb; 
-            color: white; 
+        :root {
+            --color-primario: #1e3a8a; /* Azul insignia */
+            --color-secundario: #d97706; /* Naranja/Oro logo */
+            --color-fondo: #f8fafc;
         }
 
-        .container { 
-            max-width: 800px; 
-            margin: 30px auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 6px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--color-fondo); color: #333; line-height: 1.6; }
+
+        /* Cabecera profesional con logo central */
+        header { 
+            background: linear-gradient(135deg, var(--color-primario) 0%, #0f172a 100%); 
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center;
         }
-        h2 { 
-            color: #1e3a8a; 
-            border-bottom: 2px solid #e2e8f0; 
-            padding-bottom: 8px; 
-            margin-top: 0; 
+        .logo-header { width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; border: 3px solid white; border-radius: 50%; padding: 5px; background: white; }
+        h1 { margin: 0; font-size: 32px; letter-spacing: -0.5px; }
+        p.subtitulo { margin: 5px 0 0 0; color: #cbd5e1; font-size: 16px; font-weight: 300; }
+
+        /* Menú elegante */
+        nav { 
+            background-color: white; 
+            text-align: center; 
+            padding: 15px 0;
+            position: sticky; top: 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            z-index: 100;
         }
+        nav a { 
+            margin: 0 15px; text-decoration: none; font-weight: 700; color: var(--color-primario);
+            font-size: 14px; text-transform: uppercase; transition: color 0.3s;
+        }
+        nav a:hover, nav a.active { color: var(--color-secundario); border-bottom: 2px solid var(--color-secundario); padding-bottom: 4px; }
+
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 50px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        h2 { color: var(--color-primario); border-left: 5px solid var(--color-secundario); padding-left: 15px; margin-bottom: 25px; }
+        
         .organigrama {
             background-color: #f1f5f9;
-            padding: 15px;
-            border-left: 4px solid #2563eb;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-        .organigrama strong {
-            color: #1e3a8a;
-        }
-        footer {
-            text-align: center;
             padding: 20px;
-            font-size: 13px;
-            color: #666;
-            margin-top: 40px;
+            border-left: 4px solid var(--color-primario);
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.2s;
         }
+        .organigrama:hover { transform: translateX(5px); }
+        .organigrama strong { color: var(--color-primario); display: block; font-size: 18px; margin-bottom: 5px; }
+        
+        footer { text-align: center; padding: 40px; font-size: 14px; color: #64748b; }
     </style>
 </head>
 <body>
 
 <header>
+    <img src="logo.jpg" alt="Logo ETI" class="logo-header">
     <h1>E.T.I. Capitán Anselmo Belloso</h1>
     <p class="subtitulo">Centro de Control de Estudio e Información</p>
 </header>
@@ -99,27 +78,27 @@
     
     <div class="organigrama">
         <strong>Dirección General:</strong>
-        <p style="margin: 5px 0 0 0;">Responsable de la planificación institucional y la vinculación con las zonas educativas.</p>
+        Responsable de la planificación institucional y la vinculación con las zonas educativas.
     </div>
 
     <div class="organigrama">
         <strong>Subdirección Académica:</strong>
-        <p style="margin: 5px 0 0 0;">Coordinación de los planes de estudio, asignaturas técnicas, talleres y evaluaciones de las distintas especialidades.</p>
+        Coordinación de los planes de estudio, asignaturas técnicas, talleres y evaluaciones de las distintas especialidades.
     </div>
 
     <div class="organigrama">
         <strong>Subdirección Administrativa:</strong>
-        <p style="margin: 5px 0 0 0;">Gestión del talento humano, mantenimiento de la infraestructura de los talleres e inventario de materiales.</p>
+        Gestión del talento humano, mantenimiento de la infraestructura de los talleres e inventario de materiales.
     </div>
 
     <div class="organigrama">
         <strong>Control de Estudio:</strong>
-        <p style="margin: 5px 0 0 0;">Resguardo de expedientes, registro de calificaciones, inscripciones y emisión de documentos oficiales.</p>
+        Resguardo de expedientes, registro de calificaciones, inscripciones y emisión de documentos oficiales.
     </div>
 </div>
 
 <footer>
-    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
+    &copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.
 </footer>
 
 </body>

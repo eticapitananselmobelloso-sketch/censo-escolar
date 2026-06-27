@@ -1,80 +1,57 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E.T.I. Capítan Anselmo Belloso - Inicio</title>
+    <title>E.T.I. Capitán Anselmo Belloso - Inicio</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f7f9fa; 
-            color: #333; 
-            line-height: 1.6; 
-        }
-        header { 
-            background-color: #1e3a8a; 
-            color: white; 
-            padding: 25px; 
-            text-align: center; 
-        }
-        h1 { margin: 0; font-size: 26px; }
-        p.subtitulo { margin: 5px 0 0 0; color: #bfdbfe; font-size: 14px; }
-        
-        nav { 
-            background-color: #0f172a; 
-            text-align: center; 
-            position: sticky;
-            top: 0;
-        }
-        nav a { 
-            display: inline-block; 
-            color: #cbd5e1; 
-            padding: 14px 20px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            font-size: 15px; 
-        }
-        nav a:hover { 
-            background-color: #1e293b; 
-            color: white; 
-        }
-        nav a.active { 
-            background-color: #2563eb; 
-            color: white; 
+        :root {
+            --color-primario: #1e3a8a; /* Azul insignia */
+            --color-secundario: #d97706; /* Naranja/Oro logo */
+            --color-fondo: #f8fafc;
         }
 
-        .container { 
-            max-width: 800px; 
-            margin: 30px auto; 
-            background: white; 
-            padding: 30px 40px; 
-            border-radius: 6px; 
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
-            text-align: justify; /* Alineación justificada */
-        }
-        h2 { 
-            color: #1e3a8a; 
-            border-bottom: 2px solid #e2e8f0; 
-            padding-bottom: 8px; 
-            margin-top: 30px; 
-        }
-        .seccion { margin-bottom: 30px; }
-        footer {
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--color-fondo); color: #333; line-height: 1.6; }
+
+        /* Cabecera profesional */
+        header { 
+            background: linear-gradient(135deg, var(--color-primario) 0%, #0f172a 100%); 
+            color: white; 
+            padding: 40px 20px; 
             text-align: center;
-            padding: 20px;
-            font-size: 13px;
-            color: #666;
-            margin-top: 40px;
         }
-        ul { margin: 15px 0; padding-left: 20px; }
+        .logo-header { width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; border: 3px solid white; border-radius: 50%; padding: 5px; background: white; }
+        h1 { margin: 0; font-size: 32px; letter-spacing: -0.5px; }
+        p.subtitulo { margin: 5px 0 0 0; color: #cbd5e1; font-size: 16px; font-weight: 300; }
+
+        /* Menú elegante */
+        nav { 
+            background-color: white; 
+            text-align: center; 
+            padding: 15px 0;
+            position: sticky; top: 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        nav a { 
+            margin: 0 15px; text-decoration: none; font-weight: 700; color: var(--color-primario);
+            font-size: 14px; text-transform: uppercase; transition: color 0.3s;
+        }
+        nav a:hover, nav a.active { color: var(--color-secundario); border-bottom: 2px solid var(--color-secundario); padding-bottom: 4px; }
+
+        .container { max-width: 850px; margin: 40px auto; background: white; padding: 50px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); text-align: justify; }
+        h2 { color: var(--color-primario); border-left: 5px solid var(--color-secundario); padding-left: 15px; margin-top: 40px; }
+        
+        footer { text-align: center; padding: 40px; font-size: 14px; color: #64748b; }
+        ul { padding-left: 20px; margin: 15px 0; }
         li { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
 <header>
+    <img src="logo.jpg" alt="Logo ETI" class="logo-header">
     <h1>E.T.I. Capitán Anselmo Belloso</h1>
     <p class="subtitulo">Centro de Control de Estudio e Información</p>
 </header>
@@ -88,15 +65,11 @@
 </nav>
 
 <div class="container">
-    <div class="seccion">
-        <h2>Misión</h2>
-        <p>Participar activamente en los cambios sociales que están realizándose a nivel nacional, preparando a nuestros estudiantes de acuerdo al Desarrollo Tecnológico Endógeno, como mano de obra calificada empleables en la línea de producción en los sectores empresariales y capaces de convertirse en futuros microempresarios que lideren el mercado industrial del futuro.</p>
-    </div>
+    <h2>Misión</h2>
+    <p>Participar activamente en los cambios sociales que están realizándose a nivel nacional, preparando a nuestros estudiantes de acuerdo al Desarrollo Tecnológico Endógeno, como mano de obra calificada empleables en la línea de producción en los sectores empresariales y capaces de convertirse en futuros microempresarios que lideren el mercado industrial del futuro.</p>
 
-    <div class="seccion">
-        <h2>Visión</h2>
-        <p>Brindar una formación integral para los jóvenes y adolescentes con vocación, aptitud, intereses, y necesidades orientadas al Desarrollo Endógeno, y así incorporar a nuestros egresados al campo ocupacional, con una formación tanto académica, como industrial.</p>
-    </div>
+    <h2>Visión</h2>
+    <p>Brindar una formación integral para los jóvenes y adolescentes con vocación, aptitud, intereses, y necesidades orientadas al Desarrollo Endógeno, y así incorporar a nuestros egresados al campo ocupacional, con una formación tanto académica, como industrial.</p>
 
     <h2>Objetivos Institucionales</h2>
     <ul>
@@ -147,8 +120,10 @@
 </div>
 
 <footer>
-    &copy; 2026 E.T.I. Capitán Anselmo Belloso - Todos los derechos reservados.
+    &copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.
 </footer>
 
 </body>
 </html>
+
+```
