@@ -46,13 +46,12 @@
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar</h2>
     
-    <!-- AÑADIDO: target="_blank" para asegurar el envío de archivos -->
-    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data" target="_blank">
+    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Nuevo Registro de Censo ETI">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://eticapitananselmobelloso-sketch.github.io/index.html">
-        <input type="hidden" name="_confirmation" value="true"> <!-- Fuerza envío de confirmación -->
+        <input type="hidden" name="_confirmation" value="true">
         
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
@@ -77,18 +76,11 @@
                     </select>
                 </div>
                 <div class="form-campo"><label>Parroquia de Habitación:</label><input type="text" name="parroquia_rep" required></div>
-                
                 <div class="form-campo">
-                    <label>Fotocopia Doc. Identidad:</label>
+                    <label>Fotocopia Doc. Identidad Rep.:</label>
                     <input type="file" name="doc_identidad_rep" accept="image/*,application/pdf" required>
-                    <div class="info-limite">* Máx: 5MB</div>
+                    <div class="info-limite">* Máx: 3MB</div>
                 </div>
-                <div class="form-campo">
-                    <label>Foto del Representante:</label>
-                    <input type="file" name="foto_rep" accept="image/*" required>
-                    <div class="info-limite">* Máx: 5MB</div>
-                </div>
-                
                 <div class="form-campo completo"><label>Dirección Completa:</label><textarea name="direccion_rep" rows="2" required></textarea></div>
             </div>
         </fieldset>
@@ -120,16 +112,10 @@
                         <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
                     </select>
                 </div>
-                
                 <div class="form-campo">
-                    <label>Partida Nac. o Doc. Identidad:</label>
+                    <label>Partida Nac. o Doc. Identidad Alumno:</label>
                     <input type="file" name="doc_identidad_alumno" accept="image/*,application/pdf" required>
-                    <div class="info-limite">* Máx: 5MB</div>
-                </div>
-                <div class="form-campo">
-                    <label>Foto del Alumno:</label>
-                    <input type="file" name="foto_alumno" accept="image/*" required>
-                    <div class="info-limite">* Máx: 5MB</div>
+                    <div class="info-limite">* Máx: 3MB</div>
                 </div>
             </div>
         </fieldset>
