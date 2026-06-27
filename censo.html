@@ -23,7 +23,6 @@
         .completo { grid-column: 1 / -1; }
         label { margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #475569; }
         input, select, textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
-        .aviso-peso { font-size: 11px; color: #64748b; margin-top: 5px; }
         .btn-bloque { display: block; width: 100%; background-color: var(--color-secundario); color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
@@ -45,7 +44,10 @@
 
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar</h2>
-    <form action="https://formspree.io/f/xojodyva" method="POST">
+    <!-- CONFIGURACIÓN FORMSUBMIT -->
+    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="Nuevo Registro de Censo ETI">
         
         <input type="hidden" name="foto_rep_url" id="foto_rep_url">
         <input type="hidden" name="foto_alumno_url" id="foto_alumno_url">
@@ -56,7 +58,7 @@
                 <div class="form-campo"><label>Nombres y Apellidos:</label><input type="text" name="nombre_rep" required></div>
                 <div class="form-campo"><label>Nacionalidad:</label><select name="nacionalidad_rep"><option value="Venezolano">Venezolano/a</option><option value="Extranjero">Extranjero/a</option></select></div>
                 <div class="form-campo"><label>Cédula o Pasaporte:</label><input type="text" name="cedula_rep" required></div>
-                <div class="form-campo"><label>Correo Electrónico:</label><input type="email" name="_replyto" required></div>
+                <div class="form-campo"><label>Correo Electrónico:</label><input type="email" name="email_rep" required></div>
                 <div class="form-campo"><label>Teléfono Móvil:</label><input type="tel" name="telefono_rep" required></div>
                 <div class="form-campo"><label>País de Origen:</label><input type="text" name="pais_origen" required></div>
                 <div class="form-campo"><label>Estado:</label><select name="estado_rep">
