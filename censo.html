@@ -5,59 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E.T.I. Capitán Anselmo Belloso - Censo Escolar Institucional</title>
     <style>
-        :root {
-            --color-primario: #1e3a8a;
-            --color-secundario: #d97706;
-            --color-fondo: #f8fafc;
-        }
-
+        :root { --color-primario: #1e3a8a; --color-secundario: #d97706; --color-fondo: #f8fafc; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: var(--color-fondo); color: #333; line-height: 1.6; }
-
-        /* Cabecera Institucional */
-        header { 
-            background: linear-gradient(135deg, var(--color-primario) 0%, #0f172a 100%); 
-            color: white; 
-            padding: 40px 20px; 
-            text-align: center;
-        }
+        header { background: linear-gradient(135deg, var(--color-primario) 0%, #0f172a 100%); color: white; padding: 40px 20px; text-align: center; }
         .logo-header { width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; border: 3px solid white; border-radius: 50%; padding: 5px; background: white; }
         h1 { margin: 0; font-size: 32px; letter-spacing: -0.5px; }
-        p.subtitulo { margin: 5px 0 0 0; color: #cbd5e1; font-size: 16px; font-weight: 300; }
-
-        /* Menú de Navegación */
-        nav { 
-            background-color: white; text-align: center; padding: 15px 0;
-            position: sticky; top: 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); z-index: 100;
-        }
-        nav a { 
-            margin: 0 15px; text-decoration: none; font-weight: 700; color: var(--color-primario);
-            font-size: 14px; text-transform: uppercase; transition: color 0.3s;
-        }
-        nav a:hover, nav a.active { color: var(--color-secundario); border-bottom: 2px solid var(--color-secundario); padding-bottom: 4px; }
-
-        /* Contenedor del Formulario */
+        .subtitulo { margin: 5px 0 0 0; color: #cbd5e1; font-size: 16px; font-weight: 300; }
+        nav { background-color: white; text-align: center; padding: 15px 0; position: sticky; top: 0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); z-index: 100; }
+        nav a { margin: 0 15px; text-decoration: none; font-weight: 700; color: var(--color-primario); font-size: 14px; text-transform: uppercase; }
+        nav a.active { color: var(--color-secundario); border-bottom: 2px solid var(--color-secundario); padding-bottom: 4px; }
         .container { max-width: 850px; margin: 40px auto; background: white; padding: 50px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
         h2 { color: var(--color-primario); border-left: 5px solid var(--color-secundario); padding-left: 15px; margin-bottom: 25px; }
-        
         fieldset { border: 1px solid #e2e8f0; border-radius: 8px; padding: 25px; margin-bottom: 25px; background-color: #fcfcfc; }
         legend { font-weight: bold; color: var(--color-primario); padding: 0 10px; font-size: 18px; }
-        
         .grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .form-campo { display: flex; flex-direction: column; }
         .completo { grid-column: 1 / -1; }
-        
         label { margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #475569; }
         input, select, textarea { padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
         .aviso-peso { font-size: 11px; color: #64748b; margin-top: 5px; }
-        
-        .btn-bloque { 
-            display: block; width: 100%; background-color: var(--color-secundario); 
-            color: white; padding: 16px; border: none; border-radius: 6px; 
-            font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s;
-        }
-        .btn-bloque:hover { background-color: #b45309; }
-        
-        footer { text-align: center; padding: 40px; color: #64748b; font-size: 14px; }
+        .btn-bloque { display: block; width: 100%; background-color: var(--color-secundario); color: white; padding: 16px; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -78,10 +45,11 @@
 
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar</h2>
-    
-    <!-- Acción configurada a Formspree con soporte para archivos -->
-    <form action="https://formspree.io/f/xojodyva" method="POST" enctype="multipart/form-data">
+    <form action="https://formspree.io/f/xojodyva" method="POST">
         
+        <input type="hidden" name="foto_rep_url" id="foto_rep_url">
+        <input type="hidden" name="foto_alumno_url" id="foto_alumno_url">
+
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
             <div class="grid-form">
@@ -105,8 +73,7 @@
                 <div class="form-campo"><label>Parroquia de Habitación:</label><input type="text" name="parroquia_rep" required></div>
                 <div class="form-campo">
                     <label>Foto del Representante:</label>
-                    <input type="file" name="foto_rep" accept="image/*" required>
-                    <p class="aviso-peso">* Recomendado: < 2MB</p>
+                    <input type="file" id="file_rep" accept="image/*" onchange="subirFoto('file_rep', 'foto_rep_url')">
                 </div>
                 <div class="form-campo completo"><label>Dirección Completa:</label><textarea name="direccion_rep" rows="2" required></textarea></div>
             </div>
@@ -133,8 +100,7 @@
                 </select></div>
                 <div class="form-campo">
                     <label>Foto del Aspirante:</label>
-                    <input type="file" name="foto_alumno" accept="image/*" required>
-                    <p class="aviso-peso">* Recomendado: < 2MB</p>
+                    <input type="file" id="file_alum" accept="image/*" onchange="subirFoto('file_alum', 'foto_alumno_url')">
                 </div>
             </div>
         </fieldset>
@@ -143,7 +109,28 @@
     </form>
 </div>
 
-<footer>&copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.</footer>
+<script>
+function subirFoto(inputId, hiddenInputId) {
+    const file = document.getElementById(inputId).files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64 = e.target.result.split(',')[1];
+        alert("Subiendo foto a la nube, espera un momento...");
+        fetch('https://script.google.com/macros/s/AKfycbzu5Arh8iveeqd6ww7pSPbBEcHsm_fklPxdIQDxhQ05mzALeMk_iO6cBfGfQo5JclcMIQ/exec', {
+            method: 'POST',
+            body: JSON.stringify({data: base64, filename: file.name, mimetype: file.type})
+        })
+        .then(res => res.text())
+        .then(url => {
+            document.getElementById(hiddenInputId).value = url;
+            alert("✅ Foto subida correctamente. Ya puedes enviar el formulario.");
+        });
+    };
+    reader.readAsDataURL(file);
+}
+</script>
 
+<footer>&copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.</footer>
 </body>
 </html>
