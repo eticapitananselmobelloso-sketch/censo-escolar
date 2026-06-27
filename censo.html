@@ -44,14 +44,11 @@
 
 <div class="container">
     <h2>Formulario Oficial de Censo Escolar</h2>
-    <!-- CONFIGURACIÓN FORMSUBMIT -->
-    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST">
+    
+    <form action="https://formsubmit.co/e.t.icapitananselmobelloso@gmail.com" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Nuevo Registro de Censo ETI">
         
-        <input type="hidden" name="foto_rep_url" id="foto_rep_url">
-        <input type="hidden" name="foto_alumno_url" id="foto_alumno_url">
-
         <fieldset>
             <legend>1. Datos del Representante Legal</legend>
             <div class="grid-form">
@@ -74,8 +71,8 @@
                 </select></div>
                 <div class="form-campo"><label>Parroquia de Habitación:</label><input type="text" name="parroquia_rep" required></div>
                 <div class="form-campo">
-                    <label>Foto del Representante:</label>
-                    <input type="file" id="file_rep" accept="image/*" onchange="subirFoto('file_rep', 'foto_rep_url')">
+                    <label>Adjuntar Documento/Foto Representante:</label>
+                    <input type="file" name="attachment" accept="image/*,application/pdf" required>
                 </div>
                 <div class="form-campo completo"><label>Dirección Completa:</label><textarea name="direccion_rep" rows="2" required></textarea></div>
             </div>
@@ -101,8 +98,8 @@
                     <option value="Especialidad Agropecuaria - Mención Tecnología de los Alimentos">Especialidad Agropecuaria - Mención Tecnología de los Alimentos</option>
                 </select></div>
                 <div class="form-campo">
-                    <label>Foto del Aspirante:</label>
-                    <input type="file" id="file_alum" accept="image/*" onchange="subirFoto('file_alum', 'foto_alumno_url')">
+                    <label>Adjuntar Documento/Foto Aspirante:</label>
+                    <input type="file" name="attachment" accept="image/*,application/pdf" required>
                 </div>
             </div>
         </fieldset>
@@ -110,28 +107,6 @@
         <button type="submit" class="btn-bloque">Enviar Preinscripción al Plantel</button>
     </form>
 </div>
-
-<script>
-function subirFoto(inputId, hiddenInputId) {
-    const file = document.getElementById(inputId).files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64 = e.target.result.split(',')[1];
-        alert("Subiendo foto a la nube, espera un momento...");
-        fetch('https://script.google.com/macros/s/AKfycbzu5Arh8iveeqd6ww7pSPbBEcHsm_fklPxdIQDxhQ05mzALeMk_iO6cBfGfQo5JclcMIQ/exec', {
-            method: 'POST',
-            body: JSON.stringify({data: base64, filename: file.name, mimetype: file.type})
-        })
-        .then(res => res.text())
-        .then(url => {
-            document.getElementById(hiddenInputId).value = url;
-            alert("✅ Foto subida correctamente. Ya puedes enviar el formulario.");
-        });
-    };
-    reader.readAsDataURL(file);
-}
-</script>
 
 <footer>&copy; 2026 E.T.I. Capitán Anselmo Belloso | Todos los derechos reservados.</footer>
 </body>
