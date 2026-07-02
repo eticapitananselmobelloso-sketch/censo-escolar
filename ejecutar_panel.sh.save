@@ -1,0 +1,8 @@
+#!/bin/bash
+cd /home/rafa/Escritorio/censo-escolar
+/home/rafa/Escritorio/censo-escolar/venv/bin/python3 /home/rafa/Escritorio/censo-escolar/panel_control.p#!/bin/bash
+# Activamos el entorno virtual automáticamente
+cd ~/Escritorio/censo-escolar
+source venv/bin/activate
+# Abrimos el panel de control
+python3 panel_control.py

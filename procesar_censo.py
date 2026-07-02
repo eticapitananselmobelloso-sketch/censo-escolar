@@ -3,98 +3,139 @@ import email
 import sqlite3
 import re
 import os
+import smtplib
+import hashlib
+from datetime import datetime
+from email.message import EmailMessage
 from bs4 import BeautifulSoup
 
-# Configuración
+# --- CONFIGURACIÓN ---
+EMAIL_USUARIO = "e.t.icapitananselmobelloso@gmail.com"
+EMAIL_PASS = "buhrsfbwqaagookt" 
 ETIQUETA_GMAIL = "Nuevo Registro de Censo ETI"
 CARPETA_ADJUNTOS = "adjuntos_censo"
 
-# Asegurar que la carpeta de adjuntos exista
 if not os.path.exists(CARPETA_ADJUNTOS):
     os.makedirs(CARPETA_ADJUNTOS)
 
+def enviar_aviso_duplicado(destinatario, nombre_rep, nombre_alum):
+    """Envía un correo personalizado informando del duplicado."""
+    if not destinatario or destinatario == "N/A" or "@" not in destinatario:
+        return
+    try:
+        msg = EmailMessage()
+        msg['Subject'] = "Aviso: Registro Duplicado en el Censo ETI"
+        msg['From'] = EMAIL_USUARIO
+        msg['To'] = destinatario
+        
+        cuerpo = (f"Estimado(a) {nombre_rep},\n\n"
+                  f"Le informamos que ya existe un registro previo en nuestra base de datos "
+                  f"para el alumno: {nombre_alum}.\n\n"
+                  f"Si usted ya completó este proceso anteriormente, no es necesario realizar una nueva solicitud. "
+                  f"Si cree que esto es un error, por favor comuníquese con la institución.\n\n"
+                  f"Atentamente,\nEscuela Técnica Industrial Capitán Anselmo Belloso.")
+        
+        msg.set_content(cuerpo)
+        
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_USUARIO, EMAIL_PASS)
+            smtp.send_message(msg)
+        print(f"📧 Aviso enviado a {destinatario} sobre el alumno: {nombre_alum}")
+    except Exception as e:
+        print(f"❌ Error al enviar correo de aviso: {e}")
+
+def guardar_foto_unica(nombre_prefijo, contenido):
+    """Calcula hash para evitar fotos duplicadas en disco."""
+    file_hash = hashlib.md5(contenido).hexdigest()
+    nombre_archivo = f"{nombre_prefijo}_{file_hash[:8]}.jpg"
+    ruta = os.path.join(CARPETA_ADJUNTOS, nombre_archivo)
+    if not os.path.exists(ruta):
+        with open(ruta, 'wb') as f:
+            f.write(contenido)
+    return ruta
+
 def procesar():
-    print(f"💾 Conectando a: {ETIQUETA_GMAIL}...")
-    
+    print(f"🚀 Iniciando sincronización...")
     try:
         mail = imaplib.IMAP4_SSL("imap.gmail.com")
-        mail.login("e.t.icapitananselmobelloso@gmail.com", "buhrsfbwqaagookt")
+        mail.login(EMAIL_USUARIO, EMAIL_PASS)
         mail.select(f'"{ETIQUETA_GMAIL}"')
         
-        # Procesamos todos los correos
         _, msgs = mail.search(None, 'ALL')
+        ids_correos = msgs[0].split()
         
         conn = sqlite3.connect('censo_belloso.db')
         cursor = conn.cursor()
         
-        for e_id in msgs[0].split():
-            _, data = mail.fetch(e_id, "(RFC822)")
-            msg = email.message_from_bytes(data[0][1])
-            
-            cuerpo = ""
-            adjuntos = []
-            
-            # Recorrer partes del correo para buscar texto y adjuntos
-            for part in msg.walk():
-                if part.get_content_type() == "text/html":
-                    cuerpo = part.get_payload(decode=True).decode('utf-8', 'ignore')
-                elif part.get_content_disposition() == 'attachment':
-                    adjuntos.append(part)
-            
-            if cuerpo:
-                soup = BeautifulSoup(cuerpo, 'html.parser')
-                texto = soup.get_text(separator=' ')
+        # Actualización segura de la estructura de la base de datos
+        cols_nuevas = ['foto_rep_url', 'foto_alumno_url', 'fecha_registro']
+        for col in cols_nuevas:
+            try: cursor.execute(f"ALTER TABLE aspirantes ADD COLUMN {col} TEXT")
+            except: pass
+
+        campos = ["nombre_rep", "cedula_rep", "email_rep", "telefono_rep", 
+                  "pais_origen", "estado_rep", "parroquia_rep", "nombre_alumno", 
+                  "apellido_alumno", "edad_alumno", "cedula_alumno", "tipo_ingreso", "carrera_cursar"]
+
+        for e_id in ids_correos:
+            try:
+                _, data = mail.fetch(e_id, "(RFC822)")
+                msg = email.message_from_bytes(data[0][1])
+                
+                texto_raw = ""
+                for part in msg.walk():
+                    if part.get_content_type() == "text/plain":
+                        texto_raw = part.get_payload(decode=True).decode('utf-8', 'ignore')
+                    elif part.get_content_type() == "text/html":
+                        texto_raw = BeautifulSoup(part.get_payload(decode=True).decode('utf-8', 'ignore'), 'html.parser').get_text(separator='\n')
                 
                 def b(etiqueta):
-                    patron = rf"{re.escape(etiqueta)}\s+(.*)"
-                    m = re.search(patron, texto, re.IGNORECASE)
-                    return m.group(1).strip() if m else "N/A"
+                    pattern = rf"{re.escape(etiqueta)}(.*?)(?={'|'.join([re.escape(c) for c in campos])}|$)"
+                    match = re.search(pattern, texto_raw, re.IGNORECASE | re.DOTALL)
+                    return match.group(1).strip(" :\n\r") if match else "N/A"
 
+                nombre_rep = b("nombre_rep")
+                nombre_alum_full = f"{b('nombre_alumno')} {b('apellido_alumno')}"
                 cedula_al = b("cedula_alumno")
-                nombre_al = b("nombre_alumno")
+                email_form = b("email_rep")
 
-                # Verificamos si la cédula ya existe
+                if cedula_al == "N/A": continue
+
                 cursor.execute("SELECT 1 FROM aspirantes WHERE cedula_alumno = ?", (cedula_al,))
-                if cursor.fetchone() is None and nombre_al != "N/A":
-                    
-                    # Guardar adjuntos físicamente
-                    rutas_adjuntos = {"foto_rep_url": "N/A", "foto_alumno_url": "N/A"}
-                    for adj in adjuntos:
-                        nombre_archivo = adj.get_filename()
-                        if nombre_archivo:
-                            # Creamos un nombre seguro para el archivo
-                            ruta_final = os.path.join(CARPETA_ADJUNTOS, f"{cedula_al}_{nombre_archivo}")
-                            with open(ruta_final, 'wb') as f:
-                                f.write(adj.get_payload(decode=True))
-                            
-                            # Clasificar según el nombre del archivo
-                            if "alumno" in nombre_archivo.lower():
-                                rutas_adjuntos["foto_alumno_url"] = ruta_final
-                            else:
-                                rutas_adjuntos["foto_rep_url"] = ruta_final
+                if cursor.fetchone() is None:
+                    # Procesamiento de fotos adjuntas
+                    ruta_rep, ruta_alum = "N/A", "N/A"
+                    for part in msg.walk():
+                        if part.get_content_type().startswith("image/"):
+                            contenido = part.get_payload(decode=True)
+                            nombre_adj = part.get_filename() or ""
+                            if "rep" in nombre_adj.lower(): ruta_rep = guardar_foto_unica("rep", contenido)
+                            else: ruta_alum = guardar_foto_unica("alum", contenido)
 
-                    edad = int(b("edad_alumno")) if b("edad_alumno").isdigit() else 0
+                    fecha_ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     
-                    cursor.execute('''INSERT INTO aspirantes (nombre_rep, nacionalidad_rep, cedula_rep, correo_rep, 
-                        telefono_rep, pais_origen, estado_rep, parroquia_rep, foto_rep_url, nombre_alumno, 
-                        apellido_alumno, edad_alumno, cedula_alumno, tipo_ingreso, carrera_cursar, foto_alumno_url) 
-                        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''', 
-                        (b("nombre_rep"), b("nacionalidad_rep"), b("cedula_rep"), b("email_rep"), 
-                         b("telefono_rep"), b("pais_origen"), b("estado_rep"), b("parroquia_rep"), 
-                         rutas_adjuntos["foto_rep_url"], nombre_al, b("apellido_alumno"), edad,
-                         cedula_al, b("tipo_ingreso"), b("carrera_cursar"), rutas_adjuntos["foto_alumno_url"]))
-                    
+                    cursor.execute('''INSERT INTO aspirantes (nombre_rep, cedula_rep, correo_rep, 
+                                    telefono_rep, pais_origen, estado_rep, parroquia_rep, nombre_alumno, 
+                                    apellido_alumno, edad_alumno, cedula_alumno, tipo_ingreso, carrera_cursar,
+                                    foto_rep_url, foto_alumno_url, fecha_registro) 
+                                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)''', 
+                                    (nombre_rep, b("cedula_rep"), email_form, b("telefono_rep"), b("pais_origen"), 
+                                     b("estado_rep"), b("parroquia_rep"), b("nombre_alumno"), b("apellido_alumno"), 
+                                     b("edad_alumno"), cedula_al, b("tipo_ingreso"), b("carrera_cursar"),
+                                     ruta_rep, ruta_alum, fecha_ahora))
                     conn.commit()
-                    print(f"✅ Procesado y guardado: {nombre_al}")
+                    print(f"✅ Guardado: {nombre_alum_full}")
                 else:
-                    print(f"ℹ️ Omitido (ya existe o incompleto): {nombre_al}")
+                    enviar_aviso_duplicado(email_form, nombre_rep, nombre_alum_full)
+
+            except Exception as e:
+                print(f"❌ Error en correo {e_id.decode()}: {e}")
         
         conn.close()
         mail.logout()
-        print("\n🏁 Proceso finalizado.")
-        
+        print("🏁 Proceso finalizado.")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ Error de conexión: {e}")
 
 if __name__ == "__main__":
     procesar()
